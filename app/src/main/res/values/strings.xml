@@ -10,5 +10,6 @@
     <string name="enter_query_text">Enter a query above to search for articles</string>
     <string name="section_placeholder">Sport</string>
     <string name="date_placeholder">Jan 15, 2018</string>
+    <string name="refresh">Refresh</string>
 
 </resources>

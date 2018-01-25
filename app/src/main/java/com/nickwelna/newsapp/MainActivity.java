@@ -1,14 +1,17 @@
 package com.nickwelna.newsapp;
 
-import android.app.LoaderManager;
+
 import android.content.Context;
-import android.content.Loader;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -24,6 +27,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     private ArticleAdapter articleAdapter;
     private TextView emptyView;
     private ProgressBar progressBar;
+    private boolean refresh = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +46,11 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         articleAdapter = new ArticleAdapter(new ArrayList<Article>());
         articleRecyclerView.setAdapter(articleAdapter);
 
+        makeQuery();
+
+    }
+
+    private void makeQuery() {
 
         ConnectivityManager cm =
                 (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -52,7 +61,14 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         if (isConnected) {
 
             progressBar.setVisibility(View.VISIBLE);
-            getLoaderManager().initLoader(ARTICLE_LOADER_ID, null, MainActivity.this);
+
+            if (refresh) {
+
+                getSupportLoaderManager().restartLoader(ARTICLE_LOADER_ID, null, MainActivity.this);
+                refresh = false;
+
+            }
+            getSupportLoaderManager().initLoader(ARTICLE_LOADER_ID, null, MainActivity.this);
 
         } else {
 
@@ -100,6 +116,32 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             articleAdapter.addAll(articles);
 
         }
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+        if (id == R.id.action_refresh) {
+
+            articleAdapter.clear();
+            emptyView.setText("");
+            refresh = true;
+            makeQuery();
+            return true;
+
+        }
+        return super.onOptionsItemSelected(item);
 
     }
 

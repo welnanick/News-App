@@ -46,35 +46,39 @@ public final class QueryUtils {
 
         try {
 
-            JSONObject response = new JSONObject(jsonResponse);
-            JSONObject responseObject = response.getJSONObject("response");
-            JSONArray items = responseObject.getJSONArray("results");
+            if (!jsonResponse.equals("")) {
 
-            for (int i = 0; i < items.length(); i++) {
+                JSONObject response = new JSONObject(jsonResponse);
+                JSONObject responseObject = response.getJSONObject("response");
+                JSONArray items = responseObject.getJSONArray("results");
 
-                JSONObject articleJson = items.getJSONObject(i);
+                for (int i = 0; i < items.length(); i++) {
 
-                String section = articleJson.getString("sectionName");
+                    JSONObject articleJson = items.getJSONObject(i);
 
-                // I couldn't find any results that didn't have a date, even though the project
-                // rubric said that was a possibility.
-                String publishTime = articleJson.getString("webPublicationDate");
-                SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US);
-                Date date = dateFormatter.parse(publishTime);
-                SimpleDateFormat formatter = new SimpleDateFormat("MMM d, yyyy", Locale.US);
-                String formattedDate = formatter.format(date);
-                String title = articleJson.getString("webTitle");
-                String articleUrl = articleJson.getString("webUrl");
+                    String section = articleJson.getString("sectionName");
 
-                String author = "";
+                    // I couldn't find any results that didn't have a date, even though the project
+                    // rubric said that was a possibility.
+                    String publishTime = articleJson.getString("webPublicationDate");
+                    SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US);
+                    Date date = dateFormatter.parse(publishTime);
+                    SimpleDateFormat formatter = new SimpleDateFormat("MMM d, yyyy", Locale.US);
+                    String formattedDate = formatter.format(date);
+                    String title = articleJson.getString("webTitle");
+                    String articleUrl = articleJson.getString("webUrl");
 
-                JSONArray tags = articleJson.optJSONArray("tags");
+                    String author = "";
 
-                JSONObject authorJson = tags.getJSONObject(0);
-                author = authorJson.getString("webTitle");
+                    JSONArray tags = articleJson.optJSONArray("tags");
 
-                Article article = new Article(section, title, author, formattedDate, articleUrl);
-                articles.add(article);
+                    JSONObject authorJson = tags.getJSONObject(0);
+                    author = authorJson.getString("webTitle");
+
+                    Article article = new Article(section, title, author, formattedDate, articleUrl);
+                    articles.add(article);
+
+                }
 
             }
 
