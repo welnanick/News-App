@@ -1,23 +1,29 @@
 <resources>
 
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-
     </style>
 
-    <style name="ResultAuthorTextStyle" parent="TextAppearance.AppCompat.Headline">
-
+    <style name="TitleTextStyle" parent="TextAppearance.AppCompat.Headline">
         <item name="android:textColor">@color/black</item>
-
     </style>
 
-    <style name="ResultTitleTextStyle" parent="ResultAuthorTextStyle">
+    <style name="InformationLayoutStyle">
+        <item name="android:paddingStart">@dimen/paddingSmall</item>
+        <item name="android:paddingEnd">@dimen/paddingSmall</item>
+        <item name="android:paddingTop">@dimen/paddingSmall</item>
+        <item name="android:paddingBottom">@dimen/paddingSmall</item>
+        <item name="android:orientation">vertical</item>
+    </style>
 
-        <item name="android:textStyle">bold</item>
-
+    <style name="CardViewStyle">
+        <item name="android:layout_marginBottom">@dimen/paddingSmall</item>
+        <item name="android:layout_marginTop">@dimen/paddingSmall</item>
+        <item name="android:layout_marginStart">@dimen/padding</item>
+        <item name="android:layout_marginEnd">@dimen/padding</item>
+        <item name="android:foreground">?android:attr/selectableItemBackground</item>
     </style>
 
 </resources>
