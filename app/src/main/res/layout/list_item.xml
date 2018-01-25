@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_marginBottom="@dimen/paddingSmall"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:layout_marginEnd="@dimen/padding"
+    android:layout_marginStart="@dimen/padding"
+    android:layout_marginTop="@dimen/paddingSmall">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/paddingSmall"
+        android:paddingEnd="@dimen/paddingSmall"
+        android:paddingTop="@dimen/paddingSmall"
+        android:paddingBottom="@dimen/paddingSmall"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/article_section"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                tools:text="@string/section_placeholder" />
+
+            <TextView
+                android:id="@+id/article_author"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/article_section"
+                android:paddingEnd="@dimen/paddingSmall"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                tools:text="@string/author_placeholder" />
+
+            <TextView
+                android:id="@+id/article_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/article_section"
+                android:layout_toEndOf="@id/article_author"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                tools:text="@string/date_placeholder" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/article_title"
+            style="@style/ResultTitleTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            tools:text="@string/title_placeholder" />
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>
